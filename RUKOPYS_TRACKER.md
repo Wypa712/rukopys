@@ -46,6 +46,8 @@ page image
   - training history
   - optional optimizer state
 - Demo prediction uses `loaded_model`, so checkpoint restore is covered in the notebook flow.
+- Added `export_detector_dataset.py` with YOLO-style annotation export helpers.
+- Added unit tests for YOLO bbox conversion and class filtering.
 
 ### What This Can Do Now
 
@@ -142,6 +144,16 @@ Minimum useful detector for OCR:
 
 - detect `handwritten` regions only
 
+Implementation status:
+
+- `export_detector_dataset.py` can export the Hugging Face RUKOPYS train split to this structure.
+- Default CLI exports only `handwritten` boxes for the first detector baseline.
+- Run locally or in Kaggle:
+
+```bash
+python export_detector_dataset.py --output-dir detector_data --classes handwritten
+```
+
 ### Step 4: Train Page Detector
 
 Train a detector such as YOLO on the exported dataset.
@@ -202,6 +214,6 @@ and submit to Kaggle for the hidden test score.
 
 ## Recommended Next Implementation Task
 
-Export a YOLO-style detector dataset from train page annotations.
+Run the detector dataset export and train a first YOLO detector on `handwritten` boxes.
 
-Reason: OCR checkpointing is now covered; the next Kaggle blocker is detecting handwritten regions on full test pages.
+Reason: OCR checkpointing and detector export code are now covered; the next Kaggle blocker is learning page-level handwritten box detection.
