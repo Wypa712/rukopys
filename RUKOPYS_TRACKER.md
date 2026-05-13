@@ -32,6 +32,10 @@ page image
 - Implements CER metric.
 - Adds training and validation loops.
 - Adds checkpoint save/load helpers.
+- Saves a best checkpoint by lowest validation CER during training:
+  - `crnn_rukopys_best.pt`
+  - `best_epoch`
+  - `best_val_cer`
 - Saves model metadata needed for inference:
   - `model_state_dict`
   - `idx2char`
@@ -98,6 +102,7 @@ Check:
 - validation CER decreases
 - random validation predictions become readable after enough epochs
 - `crnn_rukopys.pt` is created
+- `crnn_rukopys_best.pt` is created when validation CER improves
 
 ### Step 2: Improve OCR Training
 
@@ -105,7 +110,6 @@ Small improvements before detector work:
 
 - Set `DEBUG = False`.
 - Increase `EPOCHS`.
-- Save best checkpoint by lowest validation CER, not only final checkpoint.
 - Add validation examples after every epoch.
 - Consider filtering out non-text-heavy samples if the first model is unstable.
 
@@ -198,6 +202,6 @@ and submit to Kaggle for the hidden test score.
 
 ## Recommended Next Implementation Task
 
-Add best-checkpoint saving by validation CER in the OCR notebook.
+Export a YOLO-style detector dataset from train page annotations.
 
-Reason: before building the detector, it is useful to make OCR training repeatable and avoid losing the best epoch.
+Reason: OCR checkpointing is now covered; the next Kaggle blocker is detecting handwritten regions on full test pages.
