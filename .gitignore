@@ -1,0 +1,16 @@
+__pycache__/
+.ipynb_checkpoints/
+
+# Model checkpoints and training outputs
+*.pt
+*.pth
+*.ckpt
+runs/
+wandb/
+
+# Local datasets / generated detector exports
+data/
+detector_data/
+
+# Generated Kaggle submissions
+submission.csv
